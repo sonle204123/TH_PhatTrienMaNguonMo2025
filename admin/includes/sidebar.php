@@ -65,15 +65,15 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
           </a>
         </li>
 
-         <!-- Quản lý thống kê-->
-         <li class="nav-item">
+        <!-- Quản lý thống kê-->
+        <li class="nav-item">
           <a href="quanlythongke.php" class="nav-link <?= $currentPage == "quanlythongke.php" ? "active": "" ?>">
             <i class="nav-icon fas fa-chart-line"></i>
-            
             <p>Quản lý thống kê</p>
           </a>
         </li>
-        <!-- Đăng ký -->
+
+        <!-- Đăng xuất -->
         <li class="nav-item">
           <a href="logout.php" class="nav-link">
             <i class="nav-icon fas fa-arrow-circle-right"></i>
