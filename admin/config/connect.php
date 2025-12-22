@@ -8,7 +8,7 @@ function connectdb(){
   
     try
     {
-        $conn = new PDO("mysql:host=$servername;dbname=latop", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=laptop", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // echo "Connected Successfully";
         
