@@ -21,9 +21,38 @@ if (!$sanpham) {
 
 // Cập nhật sản phẩm khi nhấn nút Lưu
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  header('Location: quanlysanpham.php');
-  exit;
-  // ...existing code...
+    $ten_san_pham = $_POST['ten_san_pham'];
+    $mo_ta = $_POST['mo_ta'];
+    $gia = $_POST['gia'];
+    $so_luong_ton = $_POST['so_luong_ton'];
+    $anh_url = $_FILES['anh_url']['name'];
+
+    // Kiểm tra và tải lên ảnh
+    if (!empty($anh_url)) {
+        $target_dir = "./images/";
+        $target_file = $target_dir . basename($anh_url);
+        move_uploaded_file($_FILES['anh_url']['tmp_name'], $target_file);
+    } else {
+        $anh_url = $sanpham['anh_url']; // Giữ nguyên ảnh cũ nếu không tải ảnh mới
+    }
+
+    // Cập nhật dữ liệu vào CSDL
+    $sql = "UPDATE sanpham 
+            SET ten_san_pham = :ten_san_pham, mo_ta = :mo_ta, gia = :gia, so_luong_ton = :so_luong_ton, anh_url = :anh_url 
+            WHERE ma_san_pham = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        'ten_san_pham' => $ten_san_pham,
+        'mo_ta' => $mo_ta,
+        'gia' => $gia,
+        'so_luong_ton' => $so_luong_ton,
+        'anh_url' => $anh_url,
+        'id' => $id
+    ]);
+
+    // Chuyển hướng về trang quản lý sau khi cập nhật
+    header('Location: quanlysanpham.php');
+    exit;
 }
 ?>
 
